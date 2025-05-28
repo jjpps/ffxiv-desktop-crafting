@@ -1,0 +1,29 @@
+{
+  "name": "ffxiv-desktop-crafting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "init-db": "node src/init-db.js",
+    "rebuild": "electron-rebuild -f -w better-sqlite3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjpps/ffxiv-desktop-crafting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjpps/ffxiv-desktop-crafting/issues"
+  },
+  "homepage": "https://github.com/jjpps/ffxiv-desktop-crafting#readme",
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "electron": "^36.3.1"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^3.2.9"
+  }
+}
