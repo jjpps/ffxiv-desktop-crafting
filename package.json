@@ -4,9 +4,7 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron .",
-    "init-db": "node src/init-db.js",
-    "rebuild": "electron-rebuild -f -w better-sqlite3"
+    "start": "electron ."   
   },
   "repository": {
     "type": "git",
@@ -20,12 +18,10 @@
   },
   "homepage": "https://github.com/jjpps/ffxiv-desktop-crafting#readme",
   "dependencies": {
-    "better-sqlite3": "^11.10.0",
-    "electron": "^36.3.1"
+  
   },
   "devDependencies": {
-    "@eslint/js": "^9.27.0",
-    "electron-rebuild": "^3.2.9",
+    "@eslint/js": "^9.27.0",    
     "eslint": "^9.27.0",
     "globals": "^16.2.0",
     "prettier": "3.5.3"
