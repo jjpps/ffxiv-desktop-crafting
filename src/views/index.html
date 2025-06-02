@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-  <head>
-    <title>Electron Project</title>
-  </head>
-  <body>
-    <h1>Electron Typescript Beginner's Guide =)</h1>
-     <button id="my-button">Clique aqui</button>
-    <script src="./renderer.js"></script>
-  </body>
+
+<head>
+  <title>Electron Project</title>
+  <style>
+    table,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <input id="itemName" type="text" placeholder="Nome do Item" />
+  <button id="addItem">Add Item</button>
+  <button id="search" style="display: none;"> Search Itens</button>
+  <br />
+  <table id="myTable">
+    <tr>
+      <th>Item Name</th>
+      <th>Qtd</th>
+    </tr>
+  </table>
+
+
+
+
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
