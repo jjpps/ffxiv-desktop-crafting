@@ -1,23 +1,27 @@
-console.log('Hello from Renderer');
 const itens: string[] = [];
 
+const addButton = document.getElementById("addItem") as HTMLButtonElement;
+const searchButton = document.getElementById("search") as HTMLButtonElement;
 
-const itemName = document.getElementById('itemName')  as HTMLInputElement;
-const table =  document.getElementById("myTable") as HTMLTableElement;
-const addButton = document.getElementById('addItem') as HTMLButtonElement;
-const searchButton = document.getElementById('search') as HTMLButtonElement;
-addButton?.addEventListener('click',()=>{  
-  const row = table.insertRow(1);
-  var name = row.insertCell(0);
-  var qtd = row.insertCell(1);
-  name.innerHTML = itemName.value;
-  qtd.innerHTML = "1";
-  itens.push(itemName.value);
-  itemName.value ="";
-  searchButton.style.display="block";
+window.addEventListener("DOMContentLoaded", () => {
+  addButton?.addEventListener("click", () => {
+    const itemName = document.getElementById("itemName") as HTMLInputElement;
+    const table = document.getElementById("myTable") as HTMLTableElement;
+    const row = table.insertRow(1);
+    const name = row.insertCell(0);
+    const qtd = row.insertCell(1);
+    name.innerHTML = itemName.value;
+    qtd.innerHTML = "1";
+    itens.push(itemName.value);
+    itemName.value = "";
+    searchButton.style.display = "block";
+  });
+  searchButton?.addEventListener("click", async () => {
+  try {
+    const resultado = await window.api.buscar(itens);
+    console.log("Resultado no renderer:", resultado);
+  } catch (err) {
+    console.error("Erro ao buscar no renderer:", err);
+  }
 });
-
-searchButton?.addEventListener('click',()=>{
-  alert("procurar lista de itens");
-  console.log(itens);
 });

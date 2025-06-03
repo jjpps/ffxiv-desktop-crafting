@@ -1,9 +1,10 @@
 {
-    "compilerOptions": {
-        "target": "es5",         
+    "include": ["src"],
+    "compilerOptions": {       
         "module": "commonjs",    
         "strict": true,          
         "esModuleInterop": true,    
+        "rootDir": "src",
         "outDir": "./build"
     }
 }
