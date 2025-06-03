@@ -6,8 +6,7 @@ const service = new XivApiService();
 contextBridge.exposeInMainWorld("api", {
   buscar: async (itens: string[]) => {
     try {
-      const data = await service.buscarItem(itens);
-      console.log("resultado do preload:", data);
+      const data = await service.buscarReceita(itens);      
       return data;
     } catch (err) {
       console.error("Erro ao buscar itens:", err);

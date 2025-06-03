@@ -10,11 +10,12 @@ export default class XivApiClient {
     };
     const response = await AxiosConfig.xivAPI.get("/api/search", {
       params: params,
-    });
-    const data = response.data;
-    if (!data?.results || data.results.length === 0) {     
-      console.log('resultao do cliente',data);
-      return data;
-    }
+    });    
+    const data = response.data;    
+    if(data)
+      return data.results;
+    else
+      return "FALHA AO BUSCAR";
+    
   }
 }
