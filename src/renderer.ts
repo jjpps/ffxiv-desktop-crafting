@@ -22,6 +22,8 @@ window.addEventListener("DOMContentLoaded", () => {
     try {
       const resultado = await window.api.buscar(itens);      
       console.log("resultado no redner ",resultado);
+      localStorage.setItem("receitas", JSON.stringify(resultado));
+      window.location.href = "resultado.html"
     } catch (err) {
       console.error("Erro ao buscar no renderer:", err);
     }

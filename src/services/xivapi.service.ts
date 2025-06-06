@@ -4,31 +4,51 @@ import { Recipe } from "../models/RecipeModel";
 
 export default class XivApiService {
   private client = new XivApiClient();
-  //Metodo que buscar receitas e todos os seus ingredientes
-  async buscarReceita(itens: string[]): Promise<Recipe[]> {
-    const ingredientes: Ingredient[] = [];
-    const recipes: Recipe[]=[];
-    for (const nome of itens) {
-      const data = await this.client.buscarReceita("Iron Labrys");
-      if (data) {
-        console.log("Resultado do data no service:", data);
-        const ingredientFields = data[0].fields.Ingredient ?? [];
-        console.log("Resultado do ingredientFields no service:", ingredientFields);
-        const amountList: number[] = data[0].fields.AmountIngredient ?? [];
-        for (let i = 0; i < ingredientFields.length; i++) {
-          const name = ingredientFields[i]?.fields?.Name;
-          const desc = ingredientFields[i]?.fields?.Description ?? "";
-          const amount = amountList[i] ?? 0;
+  private visitados = new Set<string>();
 
-          if (name) {
-            ingredientes.push(new Ingredient(name, amount, desc));
-          }
-        }
-        const recipe =  new Recipe(data[0].fields.ItemResult?.fields.Name ?? nome, ingredientes);
-        recipes.push(recipe);
+  // Função pública chamada pelo preload
+  async buscarReceita(itens: string[]): Promise<Recipe[]> {
+    const todasReceitas: Recipe[] = [];
+
+    for (const nome of itens) {
+      const receitas = await this.buscarReceitaRecursiva(nome);
+      if(receitas)
+        todasReceitas.push(receitas);
+    }
+
+    return todasReceitas;
+  }
+
+  private async buscarReceitaRecursiva(
+    nome: string,
+    quantidade: number = 1
+  ): Promise<Recipe | null> {
+     if (this.visitados.has(nome)) return null;
+    this.visitados.add(nome);
+
+    const data = await this.client.buscarReceita(nome);
+    if (!data || data.length === 0) {
+      return null; // material base, sem receita
+    }
+
+    const result = data[0].fields;
+    const ingredientFields = result.Ingredient ?? [];
+    const amountList: number[] = result.AmountIngredient ?? [];
+    const ingredientes: Ingredient[] = [];
+
+    for (let i = 0; i < ingredientFields.length; i++) {
+      const ingName = ingredientFields[i]?.fields?.Name;
+      const ingDesc = ingredientFields[i]?.fields?.Description ?? "";
+      const ingAmount = amountList[i] ?? 0;
+
+      if (ingName) {
+        const subRecipe = await this.buscarReceitaRecursiva(ingName, ingAmount * quantidade);
+        ingredientes.push(
+          new Ingredient(ingName, ingAmount * quantidade, ingDesc, subRecipe ?? undefined)
+        );
       }
-    }   
-    console.log("resultado da receitas no service",recipes);
-    return recipes; 
+    }
+
+    return new Recipe(result.ItemResult?.fields?.Name ?? nome, ingredientes);
   }
 }
