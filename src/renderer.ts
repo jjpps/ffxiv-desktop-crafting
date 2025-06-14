@@ -9,10 +9,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (itemName.value) {
       const table = document.getElementById("myTable") as HTMLTableElement;
       const row = table.insertRow(1);
-      const name = row.insertCell(0);
-      const qtd = row.insertCell(1);
-      name.innerHTML = itemName.value;
-      qtd.innerHTML = "1";
+      const name = row.insertCell(0);      
+      name.innerHTML = itemName.value;     
       itens.push(itemName.value);
       itemName.value = "";
       searchButton.style.display = "block";

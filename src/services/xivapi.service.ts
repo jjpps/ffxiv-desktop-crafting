@@ -4,7 +4,6 @@ import { Recipe } from "../models/RecipeModel";
 
 export default class XivApiService {
   private client = new XivApiClient();
-  private visitados = new Set<string>();
 
   // Função pública chamada pelo preload
   async buscarReceita(itens: string[]): Promise<Recipe[]> {
@@ -22,9 +21,7 @@ export default class XivApiService {
   private async buscarReceitaRecursiva(
     nome: string,
     quantidade: number = 1
-  ): Promise<Recipe | null> {
-     if (this.visitados.has(nome)) return null;
-    this.visitados.add(nome);
+  ): Promise<Recipe | null> {    
 
     const data = await this.client.buscarReceita(nome);
     if (!data || data.length === 0) {
