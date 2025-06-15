@@ -12,5 +12,13 @@ contextBridge.exposeInMainWorld("api", {
       console.error("Erro ao buscar itens:", err);
       throw err;
     }
+  },
+  limparBanco:() =>{
+    try{
+      service.limparBanco();
+    }catch(err){
+      console.error("Erro ao buscar itens:", err);
+      throw err;
+    }
   }
 });

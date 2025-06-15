@@ -2,6 +2,7 @@ const itens: string[] = [];
 
 const addButton = document.getElementById("addItem") as HTMLButtonElement;
 const searchButton = document.getElementById("search") as HTMLButtonElement;
+const resetButton = document.getElementById("resetBanco") as HTMLButtonElement;
 
 window.addEventListener("DOMContentLoaded", () => {
   addButton?.addEventListener("click", () => {
@@ -25,5 +26,8 @@ window.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.error("Erro ao buscar no renderer:", err);
     }
+  });
+  resetButton?.addEventListener("click", async()=>{
+    
   });
 });

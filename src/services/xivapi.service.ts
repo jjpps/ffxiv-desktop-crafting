@@ -1,7 +1,7 @@
 import XivApiClient from "../client/xivapi.client";
 import { Ingredient } from "../models/IngredientModel";
 import { Recipe } from "../models/RecipeModel";
-import { buscarReceitaLocal, salvarReceita } from "../repositories/recipe.repository";
+import { buscarReceitaLocal, salvarReceita,limparBanco } from "../repositories/recipe.repository";
 
 export default class XivApiService {
   private client = new XivApiClient();
@@ -49,5 +49,8 @@ export default class XivApiService {
     salvarReceita(receita);
     console.log("apos salvar no banco");
     return receita;
+  }
+  public limparBanco() {
+    limparBanco();
   }
 }

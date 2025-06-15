@@ -41,3 +41,7 @@ export function buscarReceitaLocal(nome: string): Recipe | null {
 
   return new Recipe(receitaRow.nome, ingredientes);
 }
+export function limparBanco(){
+  db.exec("delete from receitas");
+  db.exec("delete from ingredientes");
+}
