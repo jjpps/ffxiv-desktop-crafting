@@ -2,7 +2,7 @@ const itens: string[] = [];
 
 const addButton = document.getElementById("addItem") as HTMLButtonElement;
 const searchButton = document.getElementById("search") as HTMLButtonElement;
-const resetButton = document.getElementById("resetBanco") as HTMLButtonElement;
+const resetButton = document.getElementById("limparBanco") as HTMLButtonElement;
 
 window.addEventListener("DOMContentLoaded", () => {
   addButton?.addEventListener("click", () => {
@@ -28,6 +28,11 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
   resetButton?.addEventListener("click", async()=>{
-    
+    const confirmar = confirm("Tem certeza que deseja limpar todos os dados locais?");
+    if (confirmar) {
+      window.api.limparBanco();
+      alert("Banco de dados local foi limpo com sucesso.");
+      location.reload();
+    }
   });
 });

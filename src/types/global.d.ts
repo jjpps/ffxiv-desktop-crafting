@@ -4,6 +4,7 @@ declare global {
   interface Window {
     api: {
       buscar: (itens: string[]) => void;
+      limparBanco:()=>void;
     };
   }
 }
