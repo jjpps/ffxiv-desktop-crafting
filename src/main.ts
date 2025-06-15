@@ -5,8 +5,8 @@ app.on("ready", () => {
   console.log("App is ready");
 
   const win = new BrowserWindow({
-    width: 600,
-    height: 400,
+    width: 1024,
+    height: 1300,
     webPreferences: {
       preload: path.join(__dirname, "./preload.js"),
       contextIsolation: true,

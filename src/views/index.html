@@ -1,38 +1,26 @@
 <!DOCTYPE html>
 
 <head>
-  <title>Electron Project</title>
-  <style>
-    table,
-    td {
-      border: 1px solid black;
-    }
-  </style>
+  <title>Crafting Desktop</title>
+  <link rel="stylesheet" href="./index.css">
 </head>
-
 <body>
- 
   <input id="itemName" type="text" placeholder="Nome do Item" />
-  <button id="addItem">Add Item</button>
-  <br/>
-  <button id="search" style="display: none;"> Search Itens</button>
-  <br />
+  <button id="addItem">Adicionar Item</button>
+  <button id="search" style="display: none;">Buscar Itens</button>
+
   <table id="myTable">
     <tr>
-      <th>Item Name</th>     
+      <th>Item</th>
     </tr>
   </table>
 
-
-
+  <footer>
+    <button id="limparBanco">Limpar Banco de Dados</button>
+  </footer>
 
   <script type="module" src="./renderer.js"></script>
 </body>
-<br/>
-<footer>
-   <button id="limparBanco" style="margin-bottom: 1em; background-color: crimson; color: white;">
-  Limpar Banco de Dados
-</button>
-</footer>
+
 
 </html>

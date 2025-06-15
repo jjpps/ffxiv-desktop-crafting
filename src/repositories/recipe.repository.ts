@@ -6,8 +6,8 @@ export function salvarReceita(recipe: Recipe) {
   const insertReceita = db.prepare("INSERT OR IGNORE INTO receitas (nome) VALUES (?)");
   const getReceitaId = db.prepare("SELECT id FROM receitas WHERE nome = ?");
   const insertIngrediente = db.prepare(`
-    INSERT INTO ingredientes (receita_id, nome, quantidade)
-    VALUES (?, ?, ?)
+    INSERT INTO ingredientes (receita_id, nome, quantidade, descricao)
+    VALUES (?, ?, ?, ?)
   `);
 
   insertReceita.run(recipe.resultName);
@@ -16,7 +16,7 @@ export function salvarReceita(recipe: Recipe) {
   for (const ing of recipe.ingredients) {
     console.log(ing);
     console.log(id);
-    insertIngrediente.run(id, ing.name, ing.amount);
+    insertIngrediente.run(id, ing.name, ing.amount,ing.description ?? null);
 
     if (ing.subRecipe) {
       salvarReceita(ing.subRecipe); // recursivo!

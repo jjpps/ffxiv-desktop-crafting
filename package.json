@@ -4,7 +4,7 @@
   "description": "",
   "main": "build/main.js",
   "scripts": {
-    "compile": "tsc && copyfiles -f src/views/*.html build",
+    "compile": "tsc && copyfiles -f src/views/*.html build && copyfiles -f src/css/*.css build",
     "start": "npm run compile && electron ."
   },
   "repository": {
