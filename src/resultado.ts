@@ -35,7 +35,7 @@ function gerarEtapasDeCraftMultiplos(receitas: any[]): string[] {
     for (const ing of recipe.ingredients) {
       if (ing.subRecipe && !criados.has(ing.subRecipe.resultName)) {
         resolver(ing.subRecipe);
-        etapas.push(`Criar ${ing.subRecipe.resultName}`);
+        etapas.push(`Create ${ing.subRecipe.resultName}`);
         criados.add(ing.subRecipe.resultName);
       }
     }
@@ -67,8 +67,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const ulMateriais = document.createElement("ul");
   materiais.forEach(({ amount, description }, nome) => {
-    const li = document.createElement("li");
-    li.textContent = `${nome} x${amount}` + (description ? ` — ${description}` : "");
+    const li = criarItemMarcavel(`${nome} x${amount}` + (description ? ` — ${description}` : ""));
     ulMateriais.appendChild(li);
   });
   container.appendChild(ulMateriais);
@@ -81,9 +80,27 @@ window.addEventListener("DOMContentLoaded", () => {
   const etapas = gerarEtapasDeCraftMultiplos(receitas);
   const ulEtapas = document.createElement("ul");
   etapas.forEach(etapa => {
-    const li = document.createElement("li");
-    li.textContent = etapa;
+    const li = criarItemMarcavel(etapa);
     ulEtapas.appendChild(li);
   });
   container.appendChild(ulEtapas);
 });
+
+function criarItemMarcavel(texto: string): HTMLLIElement {
+  const li = document.createElement("li");
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  const span = document.createElement("span");
+  span.textContent = texto;
+
+  checkbox.addEventListener("change", () => {
+    li.classList.toggle("feito", checkbox.checked);
+  });
+
+  li.appendChild(checkbox);
+  li.appendChild(span);
+
+  return li;
+}
